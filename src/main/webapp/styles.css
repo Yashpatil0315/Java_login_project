@@ -1,209 +1,666 @@
-*{
+/* Reset default styles */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Base styles */
 html,
-body{
-    height: 100%;
-    font-family: 'Roboto', sans-serif; 
-    color: rgb(255, 255, 255);
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
 }
 
-body{
+body {
+    height: 100vh;
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
-    background:radial-gradient(#3BC8DD ,#5a7dd7);
+    background-color: #f5f5f5;
 }
 
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 70%;
-    width: 70%;
-    /* background: black; */
+/* Main container */
+.container {
     position: relative;
-    border-radius: 20px;
-}
-
-.container .sign-up{
+    height: 70vh;
+    width: 80vw;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100%;
-    width: 50%;
-    background: #72dced75;
-    left:0;
-    position: absolute;
-    padding: 50px 20px 50px 20px;
-    gap: 30px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    transition: all 0.5s ease;
-    visibility: visible;
-    
-}
-
-.sign-up h2{
-   font-size: 35px; 
-    color: white;
-    text-transform: uppercase; 
-    margin-bottom: 20px;
-}
-
-/*  */
-.sign-up #input{
-    width: 80%;
-    height: 30px;
-    margin: 20px; 
-    color: black; 
+    background-color: #fff;
     border-radius: 15px;
-    padding-left: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
-
-.sign-up button{
-    display: inline-block;
-    width: 80%;
-    height: 35px;
-    font-size: large; 
-    border-color: rgba(0, 0, 0, 0.238);
-    border-radius: 20px; 
-}
-
-.container .login-panel{
-    display: flex;
-    align-items: center;
-    justify-content: center;   
-    height: 100%;
+/* Signup section */
+.signup-container {
     width: 50%;
-    background: #8fbef8d1;
-    right:0;
-    position: absolute;  
+    padding: 3rem;
+    background-color: #ffffff;
+    border-right: 1px solid #eee;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    transform: translateX(0);
+    opacity: 1;
+    z-index: 2;
 }
 
-.login-panel {
+/* Login section */
+.login-container {
+    width: 50%;
+    padding: 3rem;
+    background-color: #ffffff;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    transform: translateX(0);
+    opacity: 0;
+    z-index: 1;
+}
+
+/* Form styles */
+form {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    transition: all 0.5s ease; 
-    visibility: visible; 
+    gap: 1.5rem;
 }
 
-.login-panel h3{
-    font-size: 20px; 
-    color:rgba(0, 0, 0, 0.566);
-    text-transform: capitalize; 
-    margin-bottom: 30px;
+h1 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
 }
 
-.login-panel button{
-    border-color: rgba(0, 0, 0, 0.238);
-    border-radius: 20px;
-    width: 70%;
-    height: 30px;
+input {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
 }
 
+input:focus {
+    border-color: seagreen;
+    outline: none;
+}
 
-.sign-up-panel{
+button {
+    background-color: seagreen;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2e8b57;
+}
+
+/* Overlay container styles */
+.overlay-container {
+    position: absolute;  /* Position absolute to layer on top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;  /* Ensure it stays above the forms */
+    pointer-events: none; /* Allow clicks to pass through */
+}
+
+.overlay {
     position: absolute;
+    top: 0;
     left: 0;
     display: flex;
+    width: 100%;
     height: 100%;
-    width: 50%;
-    align-items: center;
-    background-color:#3BC8DD;
-    justify-content: center;
+}
+
+.overlay-panel {
+    display: flex;
     flex-direction: column;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    visibility: hidden;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    width: 50%;
+    background-color: rgba(46, 139, 87, 0.9);  /* Semi-transparent background */
+    transition: transform 0.6s ease-in-out;
+    pointer-events: auto; /* Re-enable clicks for panels */
 }
 
-.sign-up-panel h3{
-    font-size: 20px; 
-    /* color:rgba(0, 0, 0, 0.566); */
-    text-transform: capitalize; 
-    margin-bottom: 30px;
-}
-.sign-up-panel button{
-    font-size: large; 
-    width: 70%;
-    height: 30px;
-    border-radius: 20px;  
+.overlay-left {
+    transform: translateX(-100%);
+    background-color: #2e8b57;
+    color: white;
 }
 
-.Login {
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+    background-color: #3da370;
+    color: white;
+    z-index: 4;
+}
+
+/* Add active class for panel movement */
+.container.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+    transform: translateX(100%);
+}
+
+/* Add transition states for containers */
+.container.right-panel-active .signup-container {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.container.right-panel-active .login-container {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Ghost button style */
+.ghost {
+    background-color: transparent;
+    border: 1px solid white;
+    margin-top: 1rem;
+}
+
+.ghost:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Panel content styles */
+.overlay-panel h1 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.overlay-panel p {
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+/* Responsive design for overlay panels */
+@media screen and (max-width: 768px) {
+    .overlay {
+        flex-direction: column;
+    }
+    
+    .overlay-panel {
+        width: 100%;
+        padding: 1.5rem;
+    }
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 95vw;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .signup-container,
+    .login-container {
+        width: 100%;
+        padding: 2rem;
+    }
+
+    .signup-container {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+}
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base styles */
+html,
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    height: 100vh;
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    height: 100%;
-    width: 50%;
-    background: #99cbe5;
-    right:0;
-    position: absolute;
-    padding: 50px 20px 50px 20px;
-    gap: 30px;
-    border-top-Right-radius: 20px;
-    border-bottom-Right-radius: 20px;
-    visibility: hidden;
+    background-color: #f5f5f5;
 }
 
-.Login button{
-    display: inline-block;
-    width: 80%;
-    height: 35px;
-    font-size: large; 
-    border-color: rgba(0, 0, 0, 0.238);
-    border-radius: 20px; 
-}
-
-.Login input{
-    width: 80%;
-    height: 30px;
-    margin: 20px; 
-    color: rgba(0, 0, 0, 0.400);
+/* Main container */
+.container {
+    position: relative;
+    height: 70vh;
+    width: 80vw;
+    display: flex;
+    background-color: #fff;
     border-radius: 15px;
-    padding-left: 20px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
-.Login h2{
-    font-size: 35px; 
-    color: white;
-    text-transform: uppercase; 
-    margin-bottom: 20px;
+/* Signup section */
+.signup-container {
+    width: 50%;
+    padding: 3rem;
+    background-color: #ffffff;
+    border-right: 1px solid #eee;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    transform: translateX(0);
+    opacity: 1;
+    z-index: 2;
 }
 
-.translate-lp{
-    transform: translateX(-100%);
+/* Login section */
+.login-container {
+    width: 50%;
+    padding: 3rem;
+    background-color: #ffffff;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    transform: translateX(0);
     opacity: 0;
-    visibility: hidden;
+    z-index: 1;
 }
 
-.translate-sp{
-    /* transform: translateX(100%); */
-    visibility: visible;
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
-.translate-s{
+h1 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+input {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: seagreen;
+    outline: none;
+}
+
+button {
+    background-color: seagreen;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2e8b57;
+}
+
+/* Overlay container styles */
+.overlay-container {
+    position: absolute;  /* Position absolute to layer on top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;  /* Ensure it stays above the forms */
+    pointer-events: none; /* Allow clicks to pass through */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.overlay-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    width: 50%;
+    background-color: rgba(46, 139, 87, 0.9);  /* Semi-transparent background */
+    transition: transform 0.6s ease-in-out;
+    pointer-events: auto; /* Re-enable clicks for panels */
+}
+
+.overlay-left {
+    transform: translateX(-100%);
+    background-color: #2e8b57;
+    color: white;
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+    background-color: #3da370;
+    color: white;
+    z-index: 4;
+}
+
+/* Add active class for panel movement */
+.container.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
     transform: translateX(100%);
-    visibility: hidden;
 }
 
-.translate-l{
-    /* transform: translateX(-100%); */
-    visibility: visible;
+/* Add transition states for containers */
+.container.right-panel-active .signup-container {
+    transform: translateX(100%);
+    opacity: 0;
 }
 
+.container.right-panel-active .login-container {
+    transform: translateX(0);
+    opacity: 1;
+}
 
+/* Ghost button style */
+.ghost {
+    background-color: transparent;
+    border: 1px solid white;
+    margin-top: 1rem;
+}
 
+.ghost:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
+/* Panel content styles */
+.overlay-panel h1 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.overlay-panel p {
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+/* Responsive design for overlay panels */
+@media screen and (max-width: 768px) {
+    .overlay {
+        flex-direction: column;
+    }
+    
+    .overlay-panel {
+        width: 100%;
+        padding: 1.5rem;
+    }
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 95vw;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .signup-container,
+    .login-container {
+        width: 100%;
+        padding: 2rem;
+    }
+
+    .signup-container {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+}
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base styles */
+html,
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    height: 100vh;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+
+/* Main container */
+.container {
+    position: relative;
+    height: 70vh;
+    width: 80vw;
+    display: flex;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Signup section */
+.signup-container {
+    width: 50%;
+    padding: 3rem;
+    background-color: #ffffff;
+    border-right: 1px solid #eee;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    transform: translateX(0);
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Login section */
+.login-container {
+    width: 50%;
+    padding: 3rem;
+    background-color: #ffffff;
+    transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    transform: translateX(0);
+    opacity: 0;
+    z-index: 1;
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+input {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: seagreen;
+    outline: none;
+}
+
+button {
+    background-color: seagreen;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2e8b57;
+}
+
+/* Overlay container styles */
+.overlay-container {
+    position: absolute;  /* Position absolute to layer on top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;  /* Ensure it stays above the forms */
+    pointer-events: none; /* Allow clicks to pass through */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.overlay-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    width: 50%;
+    background-color: rgba(46, 139, 87, 0.9);  /* Semi-transparent background */
+    transition: transform 0.6s ease-in-out;
+    pointer-events: auto; /* Re-enable clicks for panels */
+}
+
+.overlay-left {
+    transform: translateX(-100%);
+    background-color: #2e8b57;
+    color: white;
+}
+
+.overlay-right {
+    right: 0;
+    transform: translateX(0);
+    background-color: #3da370;
+    color: white;
+    z-index: 4;
+}
+
+/* Add active class for panel movement */
+.container.right-panel-active .overlay-left {
+    transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+    transform: translateX(100%);
+}
+
+/* Add transition states for containers */
+.container.right-panel-active .signup-container {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.container.right-panel-active .login-container {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Ghost button style */
+.ghost {
+    background-color: transparent;
+    border: 1px solid white;
+    margin-top: 1rem;
+}
+
+.ghost:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Panel content styles */
+.overlay-panel h1 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.overlay-panel p {
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+/* Responsive design for overlay panels */
+@media screen and (max-width: 768px) {
+    .overlay {
+        flex-direction: column;
+    }
+    
+    .overlay-panel {
+        width: 100%;
+        padding: 1.5rem;
+    }
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 95vw;
+        flex-direction: column;
+        height: auto;
+    }
+
+    .signup-container,
+    .login-container {
+        width: 100%;
+        padding: 2rem;
+    }
+
+    .signup-container {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+}
 
